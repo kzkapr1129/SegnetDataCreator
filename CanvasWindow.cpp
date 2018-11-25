@@ -112,11 +112,13 @@ void CanvasWindow::onMouseEvent(int eventType, int x, int y, int flags, void* us
         self->updateLabelWindow();
         
     } else if (eventType == cv::EVENT_MBUTTONUP) {
-        // ラベル画像を保存する
-        if (self->mOnSaveFunc) {
-            self->mOnSaveFunc(self->mUserdata, self->mSrcImg, self->mLabelImg);
+        if (self->mVertexes.size() <= 0) {
+            // ラベル画像を保存する
+            if (self->mOnSaveFunc) {
+                self->mOnSaveFunc(self->mUserdata, self->mSrcImg, self->mLabelImg);
+            }
+            self->release();
         }
-        self->release();
     }
 }
 

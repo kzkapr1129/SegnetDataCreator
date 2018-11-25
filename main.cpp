@@ -36,7 +36,7 @@ struct CommonData {
         arg_outputText = argv[4];
         arg_outputImgSize = atoi(argv[5]);
 
-        getFileList(arg_inputDir, filelist, ".jpg");
+        getFileList(arg_inputDir, filelist, argv[6]);
     }
     
     bool nextSqureImage(cv::Mat& output) {
@@ -113,8 +113,8 @@ static void onClassChanged(void* userdata) {
 }
 
 int main(int argc, const char * argv[]) {
-    if (argc != 6) {
-        printf("Usage: %s <input_dir> <output_img_dir> <output_label_dir> <output.txt> <output_img_size>", argv[0]);
+    if (argc != 7) {
+        printf("Usage: %s <input_dir> <output_img_dir> <output_label_dir> <output.txt> <output_img_size> <extention>", argv[0]);
         return 0;
     }
     
