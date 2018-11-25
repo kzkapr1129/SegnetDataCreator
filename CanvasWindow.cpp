@@ -88,7 +88,7 @@ void CanvasWindow::onMouseEvent(int eventType, int x, int y, int flags, void* us
     if (eventType == cv::EVENT_LBUTTONDOWN) {
         // 頂点の打点を行う
         cv::Point vertex(x, y);
-        cv::circle(self->mWorkImg, vertex, 5, self->mClassColor, -1);
+        cv::circle(self->mWorkImg, vertex, 2, self->mClassColor, -1);
         self->mVertexes.push_back(vertex);
         
         // 再描画

@@ -85,14 +85,23 @@ static void onSaveCallback(void* userdata, const cv::Mat& src, const cv::Mat& la
     std::string baseFilename;
     genFilename(*data, baseFilename);
     
-    std::string imgPath   = data->arg_outputImgDir   + baseFilename + ".png";
-    std::string labelPath = data->arg_outputLabelDir + baseFilename + "_label.png";
+    std::string imgFile = baseFilename + ".png";
+    std::string labelFile = baseFilename + "_label.png";
+    
+    std::string imgPath   = data->arg_outputImgDir   + imgFile;
+    std::string labelPath = data->arg_outputLabelDir + labelFile;
     
     try {
         cv::imwrite(imgPath.c_str(), src);
         cv::imwrite(labelPath.c_str(), label);
     } catch (cv::Exception e) {
         printf("failed to save image: %s\n", e.what());
+    }
+    
+    FILE* fp = fopen(data->arg_outputText.c_str(), "a");
+    if (fp) {
+        fprintf(fp, "%s,%s\n", imgFile.c_str(), labelFile.c_str());
+        fclose(fp);
     }
 }
 
